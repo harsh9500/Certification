@@ -1,0 +1,33 @@
+{
+  "name": "pet-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.4.0"
+  },
+  "dependencies": {
+    "connect-history-api-fallback": "^1.5.0",
+    "consolidate": "^0.15.1",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.16.4",
+    "jQuery": "^1.7.4",
+    "jade": "^1.11.0",
+    "jquery": "^3.3.1",
+    "jsdom": "^13.1.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.0",
+    "mustache": "^3.0.1",
+    "pug": "^2.0.3",
+    "web3": "^0.19.1"
+  }
+}

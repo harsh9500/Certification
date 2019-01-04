@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certification</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container" style="width: 750px;">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center">Certification</h1>
+          <hr/>
+          <br/>
+          <div id="loader">
+            <p class="text-center">Loading...</p>
+          </div>
+          <div id="content" style="display: none;">
+            
+            <form onSubmit="App.hash(); return false;">
+              <input type="file" id="inp" class="form-control"><br>
+              <label id="b64"></label><br>
+              <img id="img" height="400"><br>
+              <label id="string_hash"></label><br>
+              <input id="address" type="text" class="form-control" placeholder="Enter address"><br>
+              <input id="pk" type="text" class="form-control" placeholder="Enter Private Key"><br>
+              <button type="submit" class="btn btn-primary">Upload</button>
+              <hr />
+            </form>
+            <hr />
+            <form>
+              <div class="form-group">
+                <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Hash</th>
+                  <th scope="col">Certificate</th>
+                </tr>
+              </thead>
+              <tbody id="Results">
+              </tbody>
+            </table>
+            <hr/>
+              </div>
+            </form>
+          <p id="accountAddress"></p><br> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    
+  </body>
+</html>
