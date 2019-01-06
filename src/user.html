@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certification</title>
+    <link href="css/hideandseek.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div class="container" style="width: 750px;">
+      <div class='row'>
+        
+          <input type="button" name="" id='transition' type='button' class="btn btn-primary" value="Transition">
+          <input type="button" name="" id='veri' type='button' class="btn btn-primary" value="Verifier">
+          
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center">Certification</h1>
+          <hr/>
+          <br/>
+          <div id="loader">
+            <p class="text-center">Loading...</p>
+          </div>
+          <div id="content" style="display: none;">
+            <div id="orgdiv" class='seek'>
+            <form onSubmit="App.hash(); return false;">
+              <input type="file" id="inp" class="form-control"><br>
+              <label id="b64" hidden></label><br>
+              <img id="img" height="400"><br>
+              <label id="string_hash" hidden></label><br>
+              <input id="address" type="text" class="form-control" placeholder="Enter address"><br>
+              <input id="pk" type="text" class="form-control" placeholder="Enter Private Key"><br>
+              <button type="submit" class="btn btn-primary">Upload</button>
+              <hr />
+            </form>
+          </div>
+            <div id="userdiv" class="hide">
+            <form>
+              <!-- <div class="form-group"> -->
+           <!--      <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Hash</th>
+                  <th scope="col">Certificate</th>
+                </tr>
+              </thead> -->
+              <div id="Results">
+              </div>
+         <!--    </table>
+            <hr/> -->
+              <!-- </div> -->
+            </form>
+          <br> 
+        </div>
+          </div>
+          <div id="verifdiv">
+            <form>
+              <!-- <div class="form-group"> -->
+           <!--      <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Hash</th>
+                  <th scope="col">Certificate</th>
+                </tr>
+              </thead> -->
+              <div id="Results2">
+              </div>
+         <!--    </table>
+            <hr/> -->
+              <!-- </div> -->
+            </form>
+            <hr />
+            <div class='container'>
+              <form onSubmit="App.verify(); return false;">
+                <input type="file" id="inpv" class="form-control"><br>
+                <label id="b64v" hidden></label><br>
+                <img id="imgv" height="400"><br>
+                <label id="string_hashv" hidden></label><br>
+                <input id="txnhash" type="text" class="form-control" placeholder="Enter transaction hash"><br>
+                <button type="submit" class="btn btn-primary">Verify</button><br>
+                <h4 id="result" style="display:none" class="text-warning"></h4>
+                <hr />
+              </form>
+            </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    
+  </body>
+</html>

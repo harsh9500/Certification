@@ -4,21 +4,27 @@ contract Certificate {
     struct Person {
         address id;
         uint no;
+    }
 
+    struct Verifier {
+        address id;
+        uint no;
     }
 
     struct certi {
         string hash;
         string certificate_string;
     }
-        
+
+    mapping(address => certi[10]) public verifiers;
+
     mapping(address => certi[10]) public certificates;
     
     mapping(address => uint) public keyDetails;
     
-    mapping(uint => bytes32) public certihashes;
-    
     mapping(uint => Person) public Persons;
+
+    mapping(uint => Verifier) public Verifiers;
 
     uint n=3127;
     uint phin=3016;
@@ -26,8 +32,8 @@ contract Certificate {
     uint remainder;
     uint pk;
     
-    uint certicount=0;
     uint public personcount=0;
+    uint public vercount=0;
 
     function Certificate() public payable{
         keyDetails[msg.sender]=3;
@@ -36,8 +42,9 @@ contract Certificate {
         keyDetails[0xA5814552D0c2A50fDC99D3e9b419aC5c04B975Ea]=200;
         keyDetails[0x916c40C84d5A0FD4a3d91f025553f8592D9eA003]=200;
         addPerson(msg.sender);
-        addtoArray(msg.sender,"ABCD1234","sdfdsfgfg1234");
-        addtoArray(msg.sender,"PQRS1234","sfsdgdg1234");
+        addVerifier(msg.sender);
+        // addtoArray(msg.sender,"ABCD1234","sdfdsfgfg1234");
+        // addtoArray(msg.sender,"PQRS1234","sfsdgdg1234");
     }
 
     function addPerson(address _p) private{
@@ -45,7 +52,12 @@ contract Certificate {
         Persons[personcount] = Person(_p,0);
     }
     
-    function HashCalculation(address p,string certi, uint private_key) public payable{    
+    function addVerifier(address _p) private{
+        vercount ++;
+        Verifiers[vercount] = Verifier(_p,0);
+    }
+
+    function HashCalculation(uint private_key) public payable{    
         
         pk = keyDetails[msg.sender];
         remainder = (pk*private_key)%phin;
@@ -53,8 +65,6 @@ contract Certificate {
         {
             revert();
         }
-        certicount++;
-        certihashes[certicount]=keccak256(certi);
 
     }
     
@@ -77,6 +87,23 @@ contract Certificate {
         
     }
 
+    function addCertitoVerifier(address p, string hash, string certi_string) public payable{
 
+    for(uint i=1;i<=vercount;i++)
+        {
+            if(Verifiers[i].id==p)
+            {
+                break;
+            }
+        }
+    if(i>vercount)
+        {
+            revert();
+        }
+
+        verifiers[p][Verifiers[i].no]=certi(hash,certi_string);
+        Verifiers[i].no+=1;
+        
+    }
     
 }
