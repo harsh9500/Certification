@@ -52,7 +52,7 @@ App = {
             Template += "<img class='farhan' src='" + arr[1] + "' class='card-img-top' style='width:40%'>";
             Template += "<div class='container'><h4><b>Hash value</b></h4><p class='secimage'>"
             Template += arr[0]
-            Template += "</p><input type='text' class='col-6 verifieraddr'><br/><input type='button' class='btn btn-primary verifier' name='"+App.temp+"' value='Send' onClick='App.verifier("+k+")'></div></div>"
+            Template += "</p><input type='text' class='col-6 verifieraddr' placeholder='Enter address'><br/><input type='button' class='btn btn-primary verifier' name='"+App.temp+"' value='Send' onClick='App.verifier("+k+")'></div></div>"
 
             
             Results.append(Template);
