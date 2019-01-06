@@ -54,7 +54,7 @@
               </div>
             </form>
             
-              <form onSubmit="verifyCerti(); return false;">
+              <form onSubmit="App.verify(); return false;">
                 <input type="file" id="inpv" class="form-control"><br>
                 <label id="b64v" hidden></label><br>
                 <img id="imgv"><br>
@@ -76,6 +76,5 @@
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/verify.js"></script>
   </body>
 </html>
