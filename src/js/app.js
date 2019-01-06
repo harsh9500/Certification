@@ -3,6 +3,7 @@ App = {
   contracts: {},
   account: '0x0',
   temp:0,
+  abi:{},
 
   init: function() {
     return App.initWeb3();
@@ -27,6 +28,9 @@ App = {
       App.contracts.Certificate = TruffleContract(certificate);
       
       App.contracts.Certificate.setProvider(App.web3Provider);
+
+      App.abi=certificate;
+      console.log(App.abi);
 
       return App.render();
     });
@@ -215,15 +219,14 @@ App = {
         
         Instance=instance
         
-
+        certi=$("#b64").text();
+        
         Instance.HashCalculation(pk).then(function(result) {
-        
-        
 
       }).catch(function(err) {
         console.error(err);
         });
-
+      
       web3.eth.sendTransaction({
           from: App.account,  
           data: string_hash
@@ -270,7 +273,8 @@ App.contracts.Certificate.deployed().then(function(instance) {
     var txnhash = $("#txnhash").val();
     var comp;
     
-
+    
+    App.contracts.Certificate.deployed().then(function(instance) {
     web3.eth.getTransaction(
           txnhash,
       function(error, hash){
@@ -293,7 +297,8 @@ App.contracts.Certificate.deployed().then(function(instance) {
         $("#result").html("Fake!!");
         $("#result").show(); 
       }
- }
+ })
+}
 
 };
 //End of App Object
@@ -307,9 +312,11 @@ $(function() {
   $img = []
   $('#transition').on('click', function(){
     if (App.fhash==0){
+      $("#transition").attr('value', 'User');
       App.fhash=1
     }
     else{
+      $("#transition").attr('value', 'Organization');
       App.fhash=0
     }
     $('.hide').addClass('set').removeClass('hide');
