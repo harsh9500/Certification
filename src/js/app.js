@@ -303,6 +303,7 @@ App.contracts.Certificate.deployed().then(function(instance) {
          $("#result").show(); 
       
       }
+<<<<<<< HEAD
         
       // comp = web3.eth.abi.decodeParameter('string',hash["input"]);
       console.log(comp);
@@ -336,6 +337,8 @@ App.contracts.Certificate.deployed().then(function(instance) {
       //    $("#result").show(); 
       
       // }
+=======
+>>>>>>> aa4f7f411fd0503de9c1c89092c2259158b7a2a9
  })
 }
 
