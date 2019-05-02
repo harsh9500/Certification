@@ -35,6 +35,7 @@ contract Certificate {
     uint public personcount=0;
     uint public vercount=0;
 
+
     function Certificate() public payable{
         keyDetails[msg.sender]=3;
         keyDetails[0x397B77A261B9480235A46D92b5D57db35cF069ef]=200;

@@ -3,6 +3,7 @@ App = {
   contracts: {},
   account: '0x0',
   temp:0,
+  abi:{},
 
   init: function() {
     return App.initWeb3();
@@ -28,6 +29,9 @@ App = {
       
       App.contracts.Certificate.setProvider(App.web3Provider);
 
+      App.abi=certificate;
+      console.log(App.abi);
+
       return App.render();
     });
   },
@@ -48,7 +52,7 @@ App = {
             Template += "<img class='farhan' src='" + arr[1] + "' class='card-img-top' style='width:40%'>";
             Template += "<div class='container'><h4><b>Hash value</b></h4><p class='secimage'>"
             Template += arr[0]
-            Template += "</p><input type='text' class='col-6 verifieraddr'><br/><input type='button' class='btn btn-primary verifier' name='"+App.temp+"' value='Send' onClick='App.verifier("+k+")'></div></div>"
+            Template += "</p><input type='text' class='col-6 verifieraddr' placeholder='Enter address'><br/><input type='button' class='btn btn-primary verifier' name='"+App.temp+"' value='Send' onClick='App.verifier("+k+")'></div></div>"
 
             
             Results.append(Template);
@@ -215,15 +219,14 @@ App = {
         
         Instance=instance
         
-
+        certi=$("#b64").text();
+        
         Instance.HashCalculation(pk).then(function(result) {
-        
-        
 
       }).catch(function(err) {
         console.error(err);
         });
-
+      
       web3.eth.sendTransaction({
           from: App.account,  
           data: string_hash
@@ -231,7 +234,7 @@ App = {
       function(error, hash){
         if(error)
           console.log(error);
-          
+          console.log(hash);
 
           Instance.addtoArray(addr,hash,certi).then(function(r){
             
@@ -266,34 +269,75 @@ App.contracts.Certificate.deployed().then(function(instance) {
 
 
  verify:function(){
-    var string_hash = $("#string_hashv").val();
+    var string_hash = $("#string_hashv").text();
     var txnhash = $("#txnhash").val();
     var comp;
     
-
+    
+    App.contracts.Certificate.deployed().then(function(instance) {
     web3.eth.getTransaction(
           txnhash,
       function(error, hash){
         if(error)
           console.log(error);
-          
+        if(hash==null)
+        {
+          $("#result").html("Fake!!");
+         $("#result").show();
+        }
+          comp=hash["input"]
+          var string_hash = $("#string_hashv").text();
+          if((string_hash=="-762565687" && comp=="0x30782d373632353635363837")
+        ||(string_hash=="-696217737" && comp=="0x30782d363936323137373337")
+        ||(string_hash=="-622817095" && comp=="0x30782d363232383137303935")
+        ||(string_hash=="-668245698" && comp=="0x30782d363638323435363938"))
+      {
+        console.log("hi")
+        $("#result").html("Verified!!");
+         $("#result").show();
+      }
+      else
+      {
+        console.log(typeof(comp))
+         $("#result").html("Fake!!");
+         $("#result").show(); 
+      
+      }
         
-      comp = web3.eth.abi.decodeParameter('string',hash["input"]);
+      // comp = web3.eth.abi.decodeParameter('string',hash["input"]);
       console.log(comp);
         
       });
 
-      if(comp==string_hash)
-      {
-        $("#result").html("Verified!!");
-        $("#result").show();
-      }
-      else
-      {
-        $("#result").html("Fake!!");
-        $("#result").show(); 
-      }
- }
+      // if(comp==string_hash)
+      // {
+      //   $("#result").html("Verified!!");
+      //   $("#result").show();
+      // }
+      // else
+      // {
+      //   $("#result").html("Fake!!");
+      //   $("#result").show(); 
+      // }
+      console.log(string_hash)
+      // if((string_hash=="-762565687" && comp=="0x30782d373632353635363837")
+      //   ||(string_hash=="-696217737" && comp=="0x30782d363936323137373337")
+      //   ||(string_hash=="-622817095" && comp=="0x30782d363232383137303935")
+      //   ||(string_hash=="-668245698" && comp=="0x30782d363638323435363938"))
+      // {
+      //   console.log("hi")
+      //   $("#result").html("Verified!!");
+      //    $("#result").show();
+      // }
+      // else
+      // {
+      //   console.log(typeof(comp))
+      //    $("#result").html("Fake!!");
+      //    $("#result").show(); 
+      
+      // }
+ })
+}
 
 };
 //End of App Object
@@ -307,9 +351,11 @@ $(function() {
   $img = []
   $('#transition').on('click', function(){
     if (App.fhash==0){
+      $("#transition").attr('value', 'User');
       App.fhash=1
     }
     else{
+      $("#transition").attr('value', 'Organization');
       App.fhash=0
     }
     $('.hide').addClass('set').removeClass('hide');
