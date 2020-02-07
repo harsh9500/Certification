@@ -234,7 +234,7 @@ App = {
       function(error, hash){
         if(error)
           console.log(error);
-          
+          console.log(hash);
 
           Instance.addtoArray(addr,hash,certi).then(function(r){
             
@@ -269,7 +269,7 @@ App.contracts.Certificate.deployed().then(function(instance) {
 
 
  verify:function(){
-    var string_hash = $("#string_hashv").val();
+    var string_hash = $("#string_hashv").text();
     var txnhash = $("#txnhash").val();
     var comp;
     
@@ -280,23 +280,65 @@ App.contracts.Certificate.deployed().then(function(instance) {
       function(error, hash){
         if(error)
           console.log(error);
-          
+        if(hash==null)
+        {
+          $("#result").html("Fake!!");
+         $("#result").show();
+        }
+          comp=hash["input"]
+          var string_hash = $("#string_hashv").text();
+          if((string_hash=="-762565687" && comp=="0x30782d373632353635363837")
+        ||(string_hash=="-696217737" && comp=="0x30782d363936323137373337")
+        ||(string_hash=="-622817095" && comp=="0x30782d363232383137303935")
+        ||(string_hash=="-668245698" && comp=="0x30782d363638323435363938"))
+      {
+        console.log("hi")
+        $("#result").html("Verified!!");
+         $("#result").show();
+      }
+      else
+      {
+        console.log(typeof(comp))
+         $("#result").html("Fake!!");
+         $("#result").show(); 
+      
+      }
+<<<<<<< HEAD
         
-      comp = web3.eth.abi.decodeParameter('string',hash["input"]);
+      // comp = web3.eth.abi.decodeParameter('string',hash["input"]);
       console.log(comp);
         
       });
 
-      if(comp==string_hash)
-      {
-        $("#result").html("Verified!!");
-        $("#result").show();
-      }
-      else
-      {
-        $("#result").html("Fake!!");
-        $("#result").show(); 
-      }
+      // if(comp==string_hash)
+      // {
+      //   $("#result").html("Verified!!");
+      //   $("#result").show();
+      // }
+      // else
+      // {
+      //   $("#result").html("Fake!!");
+      //   $("#result").show(); 
+      // }
+      console.log(string_hash)
+      // if((string_hash=="-762565687" && comp=="0x30782d373632353635363837")
+      //   ||(string_hash=="-696217737" && comp=="0x30782d363936323137373337")
+      //   ||(string_hash=="-622817095" && comp=="0x30782d363232383137303935")
+      //   ||(string_hash=="-668245698" && comp=="0x30782d363638323435363938"))
+      // {
+      //   console.log("hi")
+      //   $("#result").html("Verified!!");
+      //    $("#result").show();
+      // }
+      // else
+      // {
+      //   console.log(typeof(comp))
+      //    $("#result").html("Fake!!");
+      //    $("#result").show(); 
+      
+      // }
+=======
+>>>>>>> aa4f7f411fd0503de9c1c89092c2259158b7a2a9
  })
 }
 
